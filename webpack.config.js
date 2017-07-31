@@ -2,6 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   entry: './src/main.js',
@@ -9,15 +10,6 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     filename: 'main.js'
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      alwaysWriteToDisk: true
-    }),
-    new HtmlWebpackHarddiskPlugin({
-      outputPath: path.resolve(__dirname, 'dist')
-    })
-  ],
   module: {
     rules: [
       {
@@ -28,10 +20,15 @@ module.exports = {
             // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
             // the "scss" and "sass" values for the lang attribute to the right configs here.
             // other preprocessors should work out of the box, no loader config like this necessary.
-            'scss': 'vue-style-loader!css-loader!sass-loader',
-            'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
+            'scss': ExtractTextPlugin.extract({
+              use: 'css-loader!sass-loader',
+              fallback: 'vue-style-loader'
+            }),
+            'sass': ExtractTextPlugin.extract({
+              use: 'css-loader!sass-loader?indentedSyntax',
+              fallback: 'vue-style-loader'
+            })
           }
-          // other vue-loader options go here
         }
       },
       {
@@ -53,6 +50,16 @@ module.exports = {
       'vue$': 'vue/dist/vue.esm.js'
     }
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      alwaysWriteToDisk: true
+    }),
+    new HtmlWebpackHarddiskPlugin({
+      outputPath: path.resolve(__dirname, 'dist')
+    }),
+    new ExtractTextPlugin('style.css')
+  ],
   devServer: {
     historyApiFallback: true,
     noInfo: true
