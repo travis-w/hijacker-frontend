@@ -2,7 +2,11 @@
   <div id="app">
     <div class="header"></div>
     <div class="sidebar"></div>
-    <router-view></router-view>
+    <div class="content">
+      <div class="main container">
+        <router-view></router-view>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -18,6 +22,15 @@ export default {
 </script>
 
 <style lang="scss">
+  @import './scss/vendor/normalize';
+  @import './scss/vendor/skeleton';
+
+  @import './scss/globals';
+
+  body {
+    background-color: #F5F6FA;
+  }
+  
   .header {
     width: 100%;
     height: 80px;
@@ -36,7 +49,16 @@ export default {
               box-shadow: 5px 0 5px -2px #f2f2f2;
   }
 
-  router-view {
+  .content {
     margin-left: 200px;
+  }
+
+  .main {
+    max-width: 1000px;
+    width: 90%;
+  }
+
+  .row {
+    margin-top: 10px;
   }
 </style>

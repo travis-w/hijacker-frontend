@@ -1,9 +1,14 @@
 <template>
   <div id="rules">
-    <card>
-      <h2>Rules<div class="add-on">Test</div></h2>
-      Testing
-    </card>
+    <div class="row">
+      <div class="twelve columns">
+        <card>
+          <h2>Rules<div class="add-on">Test</div></h2>
+          Testing
+        </card>
+      </div>
+    </div>
+
   </div>
 </template>
 
