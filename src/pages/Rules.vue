@@ -3,7 +3,7 @@
     <div class="row">
       <div class="twelve columns">
         <card>
-          <h2>Rules<div class="add-on">Test</div></h2>
+          <h2>Rules<div class="add-on" @click="addRule">Test</div></h2>
           <rule></rule>
           <rule></rule>
         </card>
@@ -22,6 +22,11 @@ export default {
   components: {
     Card,
     Rule
+  },
+  methods: {
+    addRule() {
+      this.$store.commit('ADD_RULE', {})
+    }
   }
 }
 </script>
