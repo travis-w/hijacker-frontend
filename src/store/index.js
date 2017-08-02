@@ -9,7 +9,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    rules: []
+    rules: [{
+      "path": "/example-route",
+      "skipApi": true,
+      "method": "PUT",
+      "body": {
+        "Hello": "World",
+        "method": "GET"
+      }
+    }]
   },
   actions,
   getters,

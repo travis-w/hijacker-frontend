@@ -1,7 +1,7 @@
 <template>
-  <div class="rule" @click="toggle">
-    <span class="method">POST</span>
-    <span class="path">/cars</span>
+  <div class="rule" @click="toggle" :class="[rule.method ? rule.method.toLowerCase() : '', { 'disabled': rule.disabled }]">
+    <span class="method">{{ rule.method || 'ALL' }}</span>
+    <span class="path">{{ rule.path }}</span>
     <div class="collapse" v-if="open">
       <div class="category">Body</div>
       <div class="category">Paramters</div>
@@ -12,6 +12,15 @@
 <script>
 export default {
   name: 'Rule',
+  props: {
+    rule: {
+      type: Object,
+      required: true,
+      validator(value) {
+        return value.hasOwnProperty('path')
+      }
+    }
+  },
   data() {
     return {
       open: false

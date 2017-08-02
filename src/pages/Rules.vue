@@ -4,7 +4,7 @@
       <div class="twelve columns">
         <card>
           <h2>Rules<div class="add-on" @click="addRule">Test</div></h2>
-          <rule></rule>
+          <rule v-for="rule in rules" :rule="rule" :key="rule.path"></rule>
           <rule></rule>
         </card>
       </div>
@@ -26,6 +26,11 @@ export default {
   methods: {
     addRule() {
       this.$store.commit('ADD_RULE', {})
+    }
+  },
+  computed: {
+    rules() {
+      return this.$store.getters.getRules;
     }
   }
 }
