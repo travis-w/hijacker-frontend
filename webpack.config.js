@@ -1,14 +1,13 @@
 var path = require('path')
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'main.js'
+    filename: 'js/main.js'
   },
   module: {
     rules: [
@@ -55,10 +54,7 @@ module.exports = {
       template: 'src/index.html',
       alwaysWriteToDisk: true
     }),
-    new HtmlWebpackHarddiskPlugin({
-      outputPath: path.resolve(__dirname, 'dist')
-    }),
-    new ExtractTextPlugin('style.css')
+    new ExtractTextPlugin('css/style.css')
   ],
   devServer: {
     historyApiFallback: true,
