@@ -4,7 +4,8 @@
       <div class="twelve columns">
         <card>
           <h2>Rules<div class="add-on">Test</div></h2>
-          Testing
+          <rule></rule>
+          <rule></rule>
         </card>
       </div>
     </div>
@@ -14,11 +15,13 @@
 
 <script>
 import Card from '../components/Card.vue'
+import Rule from '../components/Rule.vue'
 
 export default {
   name: 'rules',
   components: {
-    Card
+    Card,
+    Rule
   }
 }
 </script>
