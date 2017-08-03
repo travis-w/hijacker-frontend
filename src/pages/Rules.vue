@@ -5,7 +5,6 @@
         <card>
           <h2>Rules<div class="add-on" @click="addRule">Test</div></h2>
           <rule v-for="rule in rules" :rule="rule" :key="rule.path"></rule>
-          <rule></rule>
         </card>
       </div>
     </div>
