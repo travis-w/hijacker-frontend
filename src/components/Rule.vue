@@ -3,7 +3,15 @@
     <span class="method">{{ rule.method || 'ALL' }}</span>
     <span class="path">{{ rule.path }}</span>
     <div class="collapse" v-if="open">
-      <div class="category">Body</div>
+      <div class="category">Resposne</div>
+      <div class="item" v-if="rule.status">
+        <div class="item-title">Status</div>
+        <div class="item-content json">{{ rule.status }}</div>
+      </div>
+      <div class="item" v-if="rule.body">
+        <div class="item-title">Body</div>
+        <div class="item-content json">{{ JSON.stringify(this.rule.body, null, 2) }}</div>
+      </div>
       <div class="category">Paramters</div>
     </div>
   </div>
@@ -147,6 +155,27 @@ export default {
     }
 
 
+  }
+
+  .item {
+    overflow-y: hidden;
+  }
+
+  .item-title {
+    width: 50%;
+    font-weight: 600;
+    display: inline-block;
+  }
+
+  .item-content {
+    width: 50%;
+    float: right;
+    display: inline-block;
+
+    &.json {
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
   }
 
 

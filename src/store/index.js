@@ -19,6 +19,7 @@ export default new Vuex.Store({
       "path": "/example-route",
       "skipApi": true,
       "method": "PUT",
+      "status": 400,
       "body": {
         "Hello": "World",
         "method": "GET"
