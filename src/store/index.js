@@ -16,13 +16,13 @@ const socketPlugin = createWebSocketPlugin(io())
 export default new Vuex.Store({
   state: {
     rules: [{
-      "path": "/example-route",
-      "skipApi": true,
-      "method": "PUT",
-      "status": 400,
-      "body": {
-        "Hello": "World",
-        "method": "GET"
+      'path': '/example-route',
+      'skipApi': true,
+      'method': 'PUT',
+      'status': 400,
+      'body': {
+        'Hello': 'World',
+        'method': 'GET'
       }
     }]
   },

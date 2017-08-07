@@ -1,5 +1,5 @@
 export default {
   getRules(state) {
-    return state.rules;
+    return state.rules
   }
 }

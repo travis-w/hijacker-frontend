@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     rules() {
-      return this.$store.getters.getRules;
+      return this.$store.getters.getRules
     }
   }
 }
