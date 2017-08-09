@@ -63,7 +63,8 @@ export default {
 
     .modal-content {
       background-color: white;
-      max-width: 35em;
+      max-width: 40em;
+      width: 90%;
       padding: 1em 1.5em;
       position: relative;
       margin: 2em;
@@ -75,8 +76,6 @@ export default {
       }
 
       .modal-content-inner {
-        padding-right: 2em;
-
         h1, h2, h3, h4, h5, h6 {
           margin-bottom: 0.25em;
         }

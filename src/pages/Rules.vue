@@ -10,7 +10,26 @@
     </div>
     <modal :open="modals.newRule" @closeBtn="modals.newRule = false">
       <h4>New Rule</h4>
-      <p>New Rule Form Here</p>
+      <form class="new-rule">
+        <div class="row">
+          <div class="six columns">
+            <label for="path">Path*</label>
+            <input class="u-full-width" type="text" v-model="path" />
+          </div>
+          <div class="three columns">
+            <label>Method</label>
+            <select class="u-full-width" v-model="method">
+              <option v-for="method in methods" :value="method">{{ method }}</option>
+            </select>
+          </div>
+          <div class="three columns">
+            <label>Status</label>
+            <input class="u-full-width" type="text" v-model="status" />
+          </div>
+        </div>
+        <label>Body</label>
+        <textarea class="u-full-width" v-model="body"></textarea>
+      </form>
     </modal>
   </div>
 </template>
@@ -20,10 +39,13 @@ import Card from '../components/Card.vue'
 import Rule from '../components/Rule.vue'
 import Modal from '../components/Modal.vue'
 
+import * as types from '../store/types'
+
 export default {
   name: 'rules',
   data() {
     return {
+      methods: ['ALL', 'POST', 'GET', 'DELETE', 'PUT', 'PATCH'],
       modals: {
         newRule: false
       }
@@ -42,11 +64,43 @@ export default {
   computed: {
     rules() {
       return this.$store.getters.getRules
+    },
+    path: {
+      get () {
+        return this.$store.state.newRule.path
+      },
+      set (value) {
+        this.$store.commit(types.UPDATE_PATH, value)
+      }
+    },
+    method: {
+      get() {
+        return this.$store.state.newRule.method
+      },
+      set(value) {
+        this.$store.commit(types.UPDATE_METHOD, value)
+      }
+    },
+    status: {
+      get() {
+        return this.$store.state.newRule.status
+      },
+      set(value) {
+        this.$store.commit(types.UPDATE_STATUS, value)
+      }
+    },
+    body: {
+      get() {
+        return this.$store.state.newRule.body
+      },
+      set(value) {
+        this.$store.commit(types.UPDATE_BODY, value)
+      }
     }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 </style>

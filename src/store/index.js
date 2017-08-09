@@ -3,10 +3,13 @@ import Vuex from 'vuex'
 
 import io from 'socket.io-client'
 
+import createWebSocketPlugin from './plugins/sockets'
+
 import actions from './actions'
 import getters from './getters'
 import mutations from './mutations'
-import createWebSocketPlugin from './plugins/sockets'
+
+import NewRuleModule from './modules/new-rule'
 
 Vue.use(Vuex)
 
@@ -29,5 +32,8 @@ export default new Vuex.Store({
   actions,
   getters,
   mutations,
+  modules: {
+    newRule: NewRuleModule
+  },
   plugins: [socketPlugin]
 })
