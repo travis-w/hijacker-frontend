@@ -14,27 +14,47 @@
         <div class="row">
           <div class="six columns">
             <label for="path">Path*</label>
-            <input class="u-full-width" type="text" v-model="path" />
+            <input
+              class="u-full-width"
+              type="text"
+              :value="path"
+              @input="updatePath"
+            />
           </div>
           <div class="three columns">
             <label>Method</label>
-            <select class="u-full-width" v-model="method">
+            <select
+              class="u-full-width"
+              :value="method"
+              @input="updateMethod"
+            >
               <option v-for="method in methods" :value="method">{{ method }}</option>
             </select>
           </div>
           <div class="three columns">
             <label>Status</label>
-            <input class="u-full-width" type="text" v-model="status" />
+            <input
+              class="u-full-width"
+              type="text"
+              :value="status"
+              @input="updateStatus"
+            />
           </div>
         </div>
         <label>Body</label>
-        <textarea class="u-full-width" v-model="body"></textarea>
+        <textarea
+          class="u-full-width"
+          :value="body"
+          @input="updateBody"
+        ></textarea>
       </form>
     </modal>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import Card from '../components/Card.vue'
 import Rule from '../components/Rule.vue'
 import Modal from '../components/Modal.vue'
@@ -57,45 +77,35 @@ export default {
     Modal
   },
   methods: {
+    updatePath(e) {
+      this.$store.commit(types.UPDATE_PATH, e.target.value)
+    },
+
+    updateMethod(e) {
+      this.$store.commit(types.UPDATE_METHOD, e.target.value)
+    },
+
+    updateStatus(e) {
+      this.$store.commit(types.UPDATE_STATUS, e.target.value)
+    },
+
+    updateBody(e) {
+      this.$store.commit(types.UPDATE_BODY, e.target.value)
+    },
+
     addRule() {
       this.$store.commit('ADD_RULE', {})
     }
   },
   computed: {
+    ...mapState({
+      path: state => state.newRule.path,
+      method: state => state.newRule.method,
+      status: state => state.newRule.status,
+      body: state => state.newRule.body
+    }),
     rules() {
       return this.$store.getters.getRules
-    },
-    path: {
-      get () {
-        return this.$store.state.newRule.path
-      },
-      set (value) {
-        this.$store.commit(types.UPDATE_PATH, value)
-      }
-    },
-    method: {
-      get() {
-        return this.$store.state.newRule.method
-      },
-      set(value) {
-        this.$store.commit(types.UPDATE_METHOD, value)
-      }
-    },
-    status: {
-      get() {
-        return this.$store.state.newRule.status
-      },
-      set(value) {
-        this.$store.commit(types.UPDATE_STATUS, value)
-      }
-    },
-    body: {
-      get() {
-        return this.$store.state.newRule.body
-      },
-      set(value) {
-        this.$store.commit(types.UPDATE_BODY, value)
-      }
     }
   }
 }

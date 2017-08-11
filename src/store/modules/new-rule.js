@@ -1,7 +1,7 @@
 import * as types from '../types'
 
 // Initial state for new rules
-const state = {
+const initialState = {
   path: '',
   status: '',
   method: 'ALL',
@@ -31,11 +31,16 @@ const mutations = {
 
   [types.UPDATE_BODY] (state, value) {
     state.body = value
+  },
+
+  // eslint-disable-next-line no-unused-vars
+  [types.CLEAR_NEW_RULE] (state) {
+    state = initialState
   }
 }
 
 export default {
-  state,
+  state: initialState,
   getters,
   actions,
   mutations
