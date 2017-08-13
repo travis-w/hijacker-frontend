@@ -17,16 +17,14 @@
             <input
               class="u-full-width"
               type="text"
-              :value="path"
-              @input="updatePath"
+              v-model="path"
             />
           </div>
           <div class="three columns">
             <label>Method</label>
             <select
               class="u-full-width"
-              :value="method"
-              @input="updateMethod"
+              v-model="method"
             >
               <option v-for="method in methods" :value="method">{{ method }}</option>
             </select>
@@ -36,16 +34,14 @@
             <input
               class="u-full-width"
               type="text"
-              :value="status"
-              @input="updateStatus"
+              v-model="status"
             />
           </div>
         </div>
         <label>Body</label>
         <textarea
           class="u-full-width"
-          :value="body"
-          @input="updateBody"
+          v-model="body"
         ></textarea>
       </form>
     </modal>
@@ -53,7 +49,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapModels } from '../util/customStateMaps'
 
 import Card from '../components/Card.vue'
 import Rule from '../components/Rule.vue'
@@ -77,32 +73,16 @@ export default {
     Modal
   },
   methods: {
-    updatePath(e) {
-      this.$store.commit(types.UPDATE_PATH, e.target.value)
-    },
-
-    updateMethod(e) {
-      this.$store.commit(types.UPDATE_METHOD, e.target.value)
-    },
-
-    updateStatus(e) {
-      this.$store.commit(types.UPDATE_STATUS, e.target.value)
-    },
-
-    updateBody(e) {
-      this.$store.commit(types.UPDATE_BODY, e.target.value)
-    },
-
     addRule() {
       this.$store.commit('ADD_RULE', {})
     }
   },
   computed: {
-    ...mapState({
-      path: state => state.newRule.path,
-      method: state => state.newRule.method,
-      status: state => state.newRule.status,
-      body: state => state.newRule.body
+    ...mapModels({
+      path: ['newRule.path', types.UPDATE_PATH],
+      method: ['newRule.method', types.UPDATE_METHOD],
+      status: ['newRule.status', types.UPDATE_STATUS],
+      body: ['newRule.body', types.UPDATE_BODY]
     }),
     rules() {
       return this.$store.getters.getRules
