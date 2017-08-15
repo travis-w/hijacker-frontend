@@ -1,8 +1,23 @@
 <template>
-  <div class="rule" @click="toggle" :class="[rule.method ? rule.method.toLowerCase() : '', { 'disabled': rule.disabled }]">
+  <div class="rule" :class="[rule.method ? rule.method.toLowerCase() : '', { 'disabled': rule.disabled }]">
     <span class="method">{{ rule.method || 'ALL' }}</span>
-    <span class="path">{{ rule.path }}</span>
+    <span class="path" @click="toggle">{{ rule.path }}</span>
     <div class="collapse" v-if="open">
+      <div class="category">Quick Settings</div>
+      <div class="row">
+        <div class="two columns">
+          <input type="checkbox" :checked="rule.disabled" @click="disableRule" /> Disabled
+        </div>
+        <div class="two columns">
+          <input type="checkbox" :checked="rule.skipApi" /> Skip API
+        </div>
+        <div class="three columns">
+          <input type="checkbox" :checked="rule.interceptRequest" /> Intercept Request
+        </div>
+        <div class="four columns">
+          <input type="checkbox" :checked="rule.interceptResponse" /> Intercept Response
+        </div>
+      </div>
       <div class="category">Resposne</div>
       <div class="item" v-if="rule.status">
         <div class="item-title">Status</div>
@@ -35,6 +50,10 @@ export default {
     }
   },
   methods: {
+    disableRule() {
+      this.$store.commit('DISABLE_RULE', this.rule)
+    },
+
     toggle() {
       this.open = !this.open
     }

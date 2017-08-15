@@ -1,5 +1,5 @@
 <template>
-  <div class="modal" v-bind:class="{ 'modal-open': this.open }">
+  <div class="modal" :class="{ 'modal-open': this.open }">
     <div class="modal-inner">
       <div class="modal-content">
         <div class="modal-close-icon">

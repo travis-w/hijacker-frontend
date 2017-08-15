@@ -2,7 +2,7 @@ import * as types from '../types'
 
 // Initial state for new rules
 const initialState = {
-  path: 'dfsa',
+  path: '',
   status: '',
   method: 'ALL',
   body: ''

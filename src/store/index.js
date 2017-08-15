@@ -10,6 +10,7 @@ import getters from './getters'
 import mutations from './mutations'
 
 import NewRuleModule from './modules/new-rule'
+import RuleModule from './modules/rules'
 
 Vue.use(Vuex)
 
@@ -17,23 +18,13 @@ Vue.use(Vuex)
 const socketPlugin = createWebSocketPlugin(io())
 
 export default new Vuex.Store({
-  state: {
-    rules: [{
-      'path': '/example-route',
-      'skipApi': true,
-      'method': 'PUT',
-      'status': 400,
-      'body': {
-        'Hello': 'World',
-        'method': 'GET'
-      }
-    }]
-  },
+  state: {},
   actions,
   getters,
   mutations,
   modules: {
-    newRule: NewRuleModule
+    newRule: NewRuleModule,
+    rules: RuleModule
   },
   plugins: [socketPlugin]
 })
