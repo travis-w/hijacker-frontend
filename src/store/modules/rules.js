@@ -11,7 +11,7 @@ const initialState = [{
     'Hello': 'World',
     'method': 'GET'
   },
-  disabled: false
+  'disabled': false
 }]
 
 const getters = {
