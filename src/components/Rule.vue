@@ -6,16 +6,16 @@
       <div class="category">Quick Settings</div>
       <div class="row">
         <div class="two columns">
-          <input type="checkbox" :checked="rule.disabled" @click="disableRule" /> Disabled
+          <input type="checkbox" :checked="rule.disabled" @click="toggleRuleDisabled" /> Disabled
         </div>
         <div class="two columns">
-          <input type="checkbox" :checked="rule.skipApi" /> Skip API
+          <input type="checkbox" :checked="rule.skipApi" @click="toggleRuleSkipApi" /> Skip API
         </div>
         <div class="three columns">
-          <input type="checkbox" :checked="rule.interceptRequest" /> Intercept Request
+          <input type="checkbox" :checked="rule.interceptRequest"  @click="toggleRuleIntReq" /> Intercept Request
         </div>
         <div class="four columns">
-          <input type="checkbox" :checked="rule.interceptResponse" /> Intercept Response
+          <input type="checkbox" :checked="rule.interceptResponse"  @click="toggleRuleIntRes" /> Intercept Response
         </div>
       </div>
       <div class="category">Resposne</div>
@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import * as types from '../store/types'
+
 export default {
   name: 'Rule',
   props: {
@@ -46,12 +48,28 @@ export default {
   },
   data() {
     return {
-      open: false
+      open: false,
     }
   },
   methods: {
-    disableRule() {
-      this.$store.commit('DISABLE_RULE', this.rule)
+    toggleRuleDisabled() {
+      // this.disabled = true
+      this.$store.commit(types.TOGGLE_RULE_DISABLED, this.rule)
+    },
+
+    toggleRuleSkipApi() {
+      // this.disabled = true
+      this.$store.commit(types.TOGGLE_RULE_SKIP_API, this.rule)
+    },
+
+    toggleRuleIntReq() {
+      // this.disabled = true
+      this.$store.commit(types.TOGGLE_RULE_INT_REQ, this.rule)
+    },
+
+    toggleRuleIntRes() {
+      // this.disabled = true
+      this.$store.commit(types.TOGGLE_RULE_INT_RES, this.rule)
     },
 
     toggle() {

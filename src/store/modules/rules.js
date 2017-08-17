@@ -10,7 +10,8 @@ const initialState = [{
   'body': {
     'Hello': 'World',
     'method': 'GET'
-  }
+  },
+  disabled: false
 }]
 
 const getters = {
@@ -22,10 +23,26 @@ const actions = {
 }
 
 const mutations = {
-  [types.DISABLE_RULE] (state, { id }) {
-    const index = state.findIndex((rule => rule.id === id))
-    state[index].disabled = true
+  [types.TOGGLE_RULE_DISABLED] (state, { id }) {
+    const index = state.findIndex(rule => rule.id === id)
+    state[index].disabled = !state[index].disabled
+  },
+
+  [types.TOGGLE_RULE_SKIP_API] (state, { id }) {
+    const index = state.findIndex(rule => rule.id === id)
+    state[index].skipApi = !state[index].skipApi
+  },
+
+  [types.TOGGLE_RULE_INT_REQ] (state, { id }) {
+    const index = state.findIndex(rule => rule.id === id)
+    state[index].interceptRequest = !state[index].interceptRequest
+  },
+
+  [types.TOGGLE_RULE_INT_RES] (state, { id }) {
+    const index = state.findIndex(rule => rule.id === id)
+    state[index].interceptResponse = !state[index].interceptResponse
   }
+
 }
 
 export default {
