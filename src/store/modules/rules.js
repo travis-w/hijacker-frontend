@@ -41,6 +41,11 @@ const mutations = {
   [types.TOGGLE_RULE_INT_RES] (state, { id }) {
     const index = state.findIndex(rule => rule.id === id)
     state[index].interceptResponse = !state[index].interceptResponse
+  },
+
+  [types.UPDATE_RULE_BODY] (state, { rule, newBody }) {
+    const index = state.findIndex(r => r.id === rule.id)
+    state[index].body = newBody
   }
 
 }

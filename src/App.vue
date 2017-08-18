@@ -22,15 +22,16 @@ export default {
 </script>
 
 <style lang="scss">
-  @import './scss/vendor/normalize';
-  @import './scss/vendor/skeleton';
+  @import './vendor/scss/normalize';
+  @import './vendor/scss/skeleton';
+  @import './vendor/scss/jsoneditor';
 
   @import './scss/globals';
 
   body {
     background-color: #F5F6FA;
   }
-  
+
   .header {
     width: 100%;
     height: 80px;

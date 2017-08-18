@@ -2,7 +2,7 @@
   <div class="rule" :class="[rule.method ? rule.method.toLowerCase() : '', { 'disabled': rule.disabled }]">
     <span class="method">{{ rule.method || 'ALL' }}</span>
     <span class="path" @click="toggle">{{ rule.path }}</span>
-    <div class="collapse" v-if="open">
+    <div class="collapse">
       <div class="category">Quick Settings</div>
       <div class="row">
         <div class="two columns">
@@ -25,7 +25,7 @@
       </div>
       <div class="item" v-if="rule.body">
         <div class="item-title">Body</div>
-        <div class="item-content json">{{ JSON.stringify(this.rule.body, null, 2) }}</div>
+        <div class="item-content" ref="jsoneditor"></div>
       </div>
       <div class="category">Paramters</div>
     </div>
@@ -49,9 +49,30 @@ export default {
   data() {
     return {
       open: false,
+      editor: null
     }
   },
+  mounted() {
+    let container = this.$refs.jsoneditor
+    let options = {
+      search: false,
+      modes: ['text', 'tree'],
+      onChange: this.updateRuleBody,
+      history: false
+    }
+    // eslint-disable-next-line
+    console.log(container)
+    this.editor = new JSONEditor(container, options)
+    this.editor.set(this.rule.body)
+  },
   methods: {
+    updateRuleBody() {
+      this.$store.commit(types.UPDATE_RULE_BODY, {
+        rule: this.rule,
+        newBody: this.editor.get()
+      })
+    },
+
     toggleRuleDisabled() {
       // this.disabled = true
       this.$store.commit(types.TOGGLE_RULE_DISABLED, this.rule)

@@ -12,5 +12,8 @@
   "rules": {
     "semi": ["error", "never"],
     "quotes": ["error", "single"]
+  },
+  "globals": {
+    "JSONEditor": true
   }
 }
