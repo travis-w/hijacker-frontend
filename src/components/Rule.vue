@@ -2,7 +2,7 @@
   <div class="rule" :class="[rule.method ? rule.method.toLowerCase() : '', { 'disabled': rule.disabled }]">
     <span class="method">{{ rule.method || 'ALL' }}</span>
     <span class="path" @click="toggle">{{ rule.path }}</span>
-    <div class="collapse">
+    <div class="collapse" v-show="open">
       <div class="category">Quick Settings</div>
       <div class="row">
         <div class="two columns">
@@ -60,8 +60,6 @@ export default {
       onChange: this.updateRuleBody,
       history: false
     }
-    // eslint-disable-next-line
-    console.log(container)
     this.editor = new JSONEditor(container, options)
     this.editor.set(this.rule.body)
   },

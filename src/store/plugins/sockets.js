@@ -5,7 +5,8 @@ export default function(socket) {
     types.TOGGLE_RULE_DISABLED,
     types.TOGGLE_RULE_SKIP_API,
     types.TOGGLE_RULE_INT_REQ,
-    types.TOGGLE_RULE_INT_RES
+    types.TOGGLE_RULE_INT_RES,
+    types.UPDATE_RULE_BODY
   ]
 
   return store => {
@@ -16,7 +17,7 @@ export default function(socket) {
 
     store.subscribe(mutation => {
       if (updateRuleMutations.indexOf(mutation.type) !== -1) {
-        socket.emit('UPDATE_RULE', mutation.payload)
+        socket.emit('UPDATE_RULE', mutation.payload.rule || mutation.payload)
       }
     })
   }
