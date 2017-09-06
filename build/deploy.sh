@@ -16,7 +16,7 @@ commit_hijacker() {
   git remote add tmp-remote https://${GH_TOKEN}@github.com/travis-w/hijacker.git
   git add src/frontend/*
   git status
-  git commit -am "Merge hijacker-frontend. Travis build: $TRAVIS_BUILD_NUMBER"
+  git commit -am "Merge hijacker-frontend. Travis build: $TRAVIS_BUILD_NUMBER" -m "$TRAVIS_COMMIT_RANGE: $TRAVIS_COMMIT_MESSAGE"
   git push --quiet --set-upstream tmp-remote master
 }
 

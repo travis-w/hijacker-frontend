@@ -3,7 +3,7 @@
     <div class="row">
       <div class="twelve columns">
         <card>
-          <h2>Rules<div class="add-on" @click="modals.newRule = true">New Rule</div></h2>
+          <h2>Rules<div class="add-on" @click="modals.newRule = true">Add Rule</div></h2>
           <rule v-for="rule in rules" :rule="rule" :key="rule.path"></rule>
         </card>
       </div>
