@@ -56,7 +56,7 @@ export default {
     let container = this.$refs.jsoneditor
     let options = {
       search: false,
-      modes: ['text', 'tree'],
+      modes: ['tree', 'code'],
       onChange: this.updateRuleBody,
       history: false
     }

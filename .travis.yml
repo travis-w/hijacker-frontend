@@ -1,9 +1,9 @@
 language: node_js
 node_js:
-  - "8"
-
-before_script:
-  - npm install
-
+- '8'
 script:
-  - npm run build
+- npm run build
+- bash ./build/deploy.sh
+env:
+  global:
+    secure: 07xd6TgbKXmYtWmZfvZtmsYKYNHxurd+BpgiTBpq84JIwmHZYvhISFqIZw/rrgxvzs4Fkz16fpaix+hhw/l+omk56Nrw6yaRav2YwCUlKgYDZUY+0ZlZaSeaB75osSPjFrf0i/z+iCduMqWO22nhvUlpBwmSqLVxmX4iudPvJSAe9kuv88N4+rWXoAb1PSYnhzthV5qB9NEjEVjPU7wg0ng4Z3vdl72+UdWxLu4S4AUz89VIOqr5ur8SgPUjIo1oKqlElPhAWV5ZvkY8VgsOrKKKNU3uII3LgHCCYFe1fgGHU2sv1M5osiBibiM4Nn0YVGiFwSNkCoBuTVUbwFNb5Vmve6vsT+biQAlyodZnL7xIYR8FTaCXB8mQIiSshuCd3PZlKW7q9aGMOxhbNYIW+XxQ3NAvOye0GCLJ+1s03W9GFyxjP/FfCWocV2yzcPQ3wwzR26v1HLaK1JVdSl2Xkyl3KQeLarUfQG0WNLCupP5/k5xKEqk/hnCVpg5iRjaxpIWNO/Fvt3TcBQ+ZFof1k4nuZ1DoIyj5nMfuDV3jhsIuOJQmf3UWHqaHETOK3nhZAL8+kY92VRzH5vSvjxXji6JR0uzxnknHxwKJvnqWwVwb30wh+qfwI34VVpP+J7yo0zRoA4bFALZVx/4FSvFE6mqsmR4MW51glAfgTpBWI4U=
