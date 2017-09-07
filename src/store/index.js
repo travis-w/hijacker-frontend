@@ -11,6 +11,8 @@ import mutations from './mutations'
 
 import NewRuleModule from './modules/new-rule'
 import RuleModule from './modules/rules'
+import InterceptModule from './modules/intercepts'
+
 
 Vue.use(Vuex)
 
@@ -24,7 +26,8 @@ export default new Vuex.Store({
   mutations,
   modules: {
     newRule: NewRuleModule,
-    rules: RuleModule
+    rules: RuleModule,
+    intercepts: InterceptModule
   },
   plugins: [socketPlugin]
 })
