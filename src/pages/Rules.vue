@@ -8,13 +8,11 @@
         </card>
       </div>
     </div>
-    <div class="row">
+    <div class="row" v-if="intercepted.length">
       <div class="twelve columns">
         <card>
           <h2>Intercepted</h2>
-          <ul>
-            <li v-for="intercept in intercepted">{{ intercept.intercept.type }}</li>
-          </ul>
+          <intercept v-for="intercept in intercepted" :intercept="intercept" :key="intercept.intercept.id"></intercept>
         </card>
       </div>
     </div>
@@ -66,6 +64,7 @@ import { mapModels } from '../util/customStateMaps'
 import Card from '../components/Card.vue'
 import Rule from '../components/Rule.vue'
 import Modal from '../components/Modal.vue'
+import Intercept from '../components/Intercept.vue'
 
 import * as types from '../store/types'
 
@@ -82,7 +81,8 @@ export default {
   components: {
     Card,
     Rule,
-    Modal
+    Modal,
+    Intercept
   },
   methods: {
     addRule() {
