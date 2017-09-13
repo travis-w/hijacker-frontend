@@ -8,6 +8,16 @@
         </card>
       </div>
     </div>
+    <div class="row">
+      <div class="twelve columns">
+        <card>
+          <h2>Intercepted</h2>
+          <ul>
+            <li v-for="intercept in intercepted">{{ intercept.intercept.type }}</li>
+          </ul>
+        </card>
+      </div>
+    </div>
     <modal :open="modals.newRule" @closeBtn="modals.newRule = false">
       <h4>New Rule</h4>
       <form class="new-rule">
@@ -49,6 +59,8 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from 'vuex'
+
 import { mapModels } from '../util/customStateMaps'
 
 import Card from '../components/Card.vue'
@@ -84,9 +96,12 @@ export default {
       status: ['newRule.status', types.UPDATE_STATUS],
       body: ['newRule.body', types.UPDATE_BODY]
     }),
-    rules() {
-      return this.$store.getters.getRules
-    }
+    ...mapGetters({
+      rules: 'getRules'
+    }),
+    ...mapState({
+      intercepted: 'intercepts'
+    })
   }
 }
 </script>
