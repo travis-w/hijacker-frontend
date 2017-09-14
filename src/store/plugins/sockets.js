@@ -6,9 +6,7 @@ export default function(socket) {
     types.TOGGLE_RULE_SKIP_API,
     types.TOGGLE_RULE_INT_REQ,
     types.TOGGLE_RULE_INT_RES,
-    types.UPDATE_RULE_BODY,
-    types.ADD_NEW_REQUEST,
-    types.ADD_NEW_RESPONSE
+    types.UPDATE_RULE_BODY
   ]
 
   return store => {
@@ -29,12 +27,15 @@ export default function(socket) {
     })
 
     store.subscribe(mutation => {
-      // Updating a rule
       if (updateRuleMutations.indexOf(mutation.type) !== -1) {
+        // Updating a rule
         socket.emit('UPDATE_RULE', mutation.payload.rule || mutation.payload)
       } else if (mutation.type === types.RESUME_INTERCEPT) {
         // Resuming intercept
         socket.emit(mutation.payload.intercept.id, mutation.payload)
+      } else if (mutation.type === types.ADD_NEW_RULE) {
+        // Add a new rule
+        socket.emit('ADD_RULE', JSON.parse(JSON.stringify(store.state.newRule)))
       }
     })
   }

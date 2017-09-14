@@ -16,7 +16,7 @@
         </card>
       </div>
     </div>
-    <modal :open="modals.newRule" @closeBtn="modals.newRule = false">
+    <modal :open="modals.newRule" @closeBtn="cancelNewRule" @success="addRule">
       <h4>New Rule</h4>
       <form class="new-rule">
         <div class="row">
@@ -86,7 +86,11 @@ export default {
   },
   methods: {
     addRule() {
-      this.$store.commit('ADD_RULE', {})
+      this.$store.commit('ADD_NEW_RULE')
+    },
+    cancelNewRule() {
+      this.modals.newRule = false
+      this.$store.commit(types.CLEAR_NEW_RULE)
     }
   },
   computed: {

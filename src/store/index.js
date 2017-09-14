@@ -17,7 +17,7 @@ import InterceptModule from './modules/intercepts'
 Vue.use(Vuex)
 
 // Setup Socket Plugin
-const socketPlugin = createWebSocketPlugin(io())
+const socketPlugin = createWebSocketPlugin(io('http://localhost:3000'))
 
 export default new Vuex.Store({
   state: {},

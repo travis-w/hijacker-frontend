@@ -8,6 +8,10 @@ const initialState = {
   body: ''
 }
 
+const state = {
+  ...initialState
+}
+
 const getters = {
 
 }
@@ -35,12 +39,20 @@ const mutations = {
 
   // eslint-disable-next-line no-unused-vars
   [types.CLEAR_NEW_RULE] (state) {
-    state = initialState
+    state.path = initialState.path
+    state.status = initialState.status
+    state.method = initialState.method
+    state.body = initialState.body
+  },
+
+  // eslint-disable-next-line no-unused-vars
+  [types.ADD_NEW_RULE] (state) {
+
   }
 }
 
 export default {
-  state: initialState,
+  state,
   getters,
   actions,
   mutations
