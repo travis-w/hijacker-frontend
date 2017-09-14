@@ -16,3 +16,4 @@ export const UPDATE_RULE_BODY     = 'UPDATE_RULE_BODY'
 // Intercepted
 export const ADD_NEW_REQUEST  = 'ADD_NEW_REQUEST'
 export const ADD_NEW_RESPONSE = 'ADD_NEW_RESPONSE'
+export const RESUME_INTERCEPT = 'RESUME_INTERCEPT'

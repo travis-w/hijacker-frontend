@@ -29,8 +29,12 @@ export default function(socket) {
     })
 
     store.subscribe(mutation => {
+      // Updating a rule
       if (updateRuleMutations.indexOf(mutation.type) !== -1) {
         socket.emit('UPDATE_RULE', mutation.payload.rule || mutation.payload)
+      } else if (mutation.type === types.RESUME_INTERCEPT) {
+        // Resuming intercept
+        socket.emit(mutation.payload.intercept.id, mutation.payload)
       }
     })
   }

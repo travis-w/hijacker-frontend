@@ -1,10 +1,16 @@
 <template>
   <div class="rule">
-    {{ intercept.intercept.id }}
+    <span @click="resumeIntercept(intercept)">
+      {{ intercept.intercept.id }}
+    </span>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
+import * as types from '../store/types'
+
 export default {
   name: 'Intercept',
   props: {
@@ -23,18 +29,20 @@ export default {
     }
   },
   mounted() {
-    let container = this.$refs.jsoneditor
-    let options = {
-      search: false,
-      modes: ['tree', 'code'],
-      onChange: this.updateRuleBody,
-      history: false
-    }
-    this.editor = new JSONEditor(container, options)
-    this.editor.set(this.rule.body)
+    // let container = this.$refs.jsoneditor
+    // let options = {
+    //   search: false,
+    //   modes: ['tree', 'code'],
+    //   onChange: this.updateRuleBody,
+    //   history: false
+    // }
+    // this.editor = new JSONEditor(container, options)
+    // this.editor.set(this.rule.body)
   },
   methods: {
-
+    ...mapMutations({
+      resumeIntercept: types.RESUME_INTERCEPT
+    })
   }
 }
 </script>

@@ -18,6 +18,11 @@ const mutations = {
 
   [types.ADD_NEW_RESPONSE] (state, data) {
     state.push(data)
+  },
+
+  [types.RESUME_INTERCEPT] (state, { intercept }) {
+    const index = state.findIndex( int => int.intercept.id = intercept.id)
+    state.splice(index, 1)
   }
 }
 
