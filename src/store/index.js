@@ -13,11 +13,10 @@ import NewRuleModule from './modules/new-rule'
 import RuleModule from './modules/rules'
 import InterceptModule from './modules/intercepts'
 
-
 Vue.use(Vuex)
 
 // Setup Socket Plugin
-const socketPlugin = createWebSocketPlugin(io('http://localhost:3000'))
+const socketPlugin = createWebSocketPlugin(io())
 
 export default new Vuex.Store({
   state: {},

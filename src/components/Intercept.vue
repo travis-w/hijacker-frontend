@@ -1,8 +1,7 @@
 <template>
-  <div class="rule">
-    <span @click="resumeIntercept(intercept)">
-      {{ intercept.intercept.id }}
-    </span>
+  <div class="intercept">
+    <span>{{ intercept.intercept.type }}</span>
+    <span>{{ intercept.rule.path }}</span>
   </div>
 </template>
 
