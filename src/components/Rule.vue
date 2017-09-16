@@ -53,15 +53,17 @@ export default {
     }
   },
   mounted() {
-    let container = this.$refs.jsoneditor
-    let options = {
-      search: false,
-      modes: ['tree', 'code'],
-      onChange: this.updateRuleBody,
-      history: false
+    if (this.rule.body) {
+      let container = this.$refs.jsoneditor
+      let options = {
+        search: false,
+        modes: ['tree', 'code'],
+        onChange: this.updateRuleBody,
+        history: false
+      }
+      this.editor = new JSONEditor(container, options)
+      this.editor.set(this.rule.body)
     }
-    this.editor = new JSONEditor(container, options)
-    this.editor.set(this.rule.body)
   },
   methods: {
     updateRuleBody() {
