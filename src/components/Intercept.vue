@@ -1,7 +1,7 @@
 <template>
-  <div class="intercept">
-    <span>{{ intercept.intercept.type }}</span>
-    <span>{{ intercept.rule.path }}</span>
+  <div class="intercept" @click="resumeIntercept(intercept)">
+    <span class="type">{{ intercept.intercept.type === 'request' ? 'REQ' : "RES" }}</span>
+    <span class="path">{{ intercept.rule.path }}</span>
   </div>
 </template>
 
@@ -48,6 +48,28 @@ export default {
 
 <style lang="scss" scoped>
   .intercept {
+    width: 100%;
+    margin: 5px 0;
+    padding: 5px;
+    background-color: #ebf3fb;
+    border: 1px solid #61affe;
+    box-sizing: border-box;
 
+    & > .type {
+      text-align: center;
+      display: inline-block;
+      background-color: #61affe;
+      padding: 3px 3px;
+      width: 75px;
+      box-sizing: border-box;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    & > .path {
+      color: #3d3d3d;
+      font-weight: 600;
+      margin-left: 5px;
+    }
   }
 </style>
