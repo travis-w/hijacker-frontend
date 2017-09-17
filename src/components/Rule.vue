@@ -1,7 +1,7 @@
 <template>
   <div class="rule" :class="[rule.method ? rule.method.toLowerCase() : '', { 'disabled': rule.disabled }]">
     <span class="method">{{ rule.method || 'ALL' }}</span>
-    <span class="path" @click="toggle">{{ rule.path }}</span>
+    <span class="path" @click="toggle">{{ rule.name ? `${rule.name} - ` : '' }} {{ rule.path }}</span>
     <div class="collapse" v-show="open">
       <div class="category">Quick Settings</div>
       <div class="row">
@@ -235,8 +235,5 @@ export default {
       white-space: pre-wrap;
     }
   }
-
-
-
 
 </style>
