@@ -60,7 +60,8 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js'
-    }
+    },
+    extensions: ['*', '.js', '.vue', '.json']
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -71,7 +72,8 @@ module.exports = {
   ],
   devServer: {
     historyApiFallback: true,
-    noInfo: true
+    noInfo: true,
+    overlay: true
   },
   performance: {
     hints: false
