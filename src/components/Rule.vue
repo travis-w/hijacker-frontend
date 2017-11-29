@@ -25,7 +25,7 @@
       </div>
       <div class="item" v-if="rule.body">
         <div class="item-title">Body</div>
-        <div class="item-content" ref="jsoneditor"></div>
+        <JSONEditor :json="rule.body" @change="updateRuleBody" class="item-content"></JSONEditor>
       </div>
       <div class="category">Paramters</div>
     </div>
@@ -34,6 +34,8 @@
 
 <script>
 import * as types from '../store/types'
+
+import JSONEditor from './JSONEditor.vue'
 
 export default {
   name: 'Rule',
@@ -46,50 +48,35 @@ export default {
       }
     }
   },
+  components: {
+    JSONEditor
+  },
   data() {
     return {
-      open: false,
-      editor: null
-    }
-  },
-  mounted() {
-    if (this.rule.body) {
-      let container = this.$refs.jsoneditor
-      let options = {
-        search: false,
-        modes: ['tree', 'code'],
-        onChange: this.updateRuleBody,
-        history: false
-      }
-      this.editor = new JSONEditor(container, options)
-      this.editor.set(this.rule.body)
+      open: false
     }
   },
   methods: {
-    updateRuleBody() {
+    updateRuleBody(val) {
       this.$store.commit(types.UPDATE_RULE_BODY, {
         rule: this.rule,
-        newBody: this.editor.get()
+        newBody: val
       })
     },
 
     toggleRuleDisabled() {
-      // this.disabled = true
       this.$store.commit(types.TOGGLE_RULE_DISABLED, this.rule)
     },
 
     toggleRuleSkipApi() {
-      // this.disabled = true
       this.$store.commit(types.TOGGLE_RULE_SKIP_API, this.rule)
     },
 
     toggleRuleIntReq() {
-      // this.disabled = true
       this.$store.commit(types.TOGGLE_RULE_INT_REQ, this.rule)
     },
 
     toggleRuleIntRes() {
-      // this.disabled = true
       this.$store.commit(types.TOGGLE_RULE_INT_RES, this.rule)
     },
 

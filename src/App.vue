@@ -24,7 +24,6 @@ export default {
 <style lang="scss">
   @import './vendor/scss/normalize';
   @import './vendor/scss/skeleton';
-  @import './vendor/scss/jsoneditor';
 
   @import './scss/globals';
 
