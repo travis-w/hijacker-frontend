@@ -15,6 +15,10 @@ export default function(socket) {
       store.commit('SET_RULES', data.rules)
     })
 
+    socket.on('UPDATE_RULE_LIST', function(data) {
+      store.commit('SET_RULES', data)
+    })
+
     socket.on('intercept', function(data) {
       switch (data.intercept.type) {
         case 'request':
