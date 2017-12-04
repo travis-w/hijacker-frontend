@@ -1,14 +1,6 @@
 import * as types from '../types'
 
 export default function(socket) {
-  const updateRuleMutations = [
-    types.TOGGLE_RULE_DISABLED,
-    types.TOGGLE_RULE_SKIP_API,
-    types.TOGGLE_RULE_INT_REQ,
-    types.TOGGLE_RULE_INT_RES,
-    types.UPDATE_RULE_BODY
-  ]
-
   return store => {
     // Events from sockets
     socket.on('settings', function(data) {
@@ -31,7 +23,7 @@ export default function(socket) {
     })
 
     store.subscribe(mutation => {
-      if (updateRuleMutations.indexOf(mutation.type) !== -1) {
+      if (mutation.type === types.UPDATE_RULE) {
         // Updating a rule
         socket.emit('UPDATE_RULE', mutation.payload.rule || mutation.payload)
       } else if (mutation.type === types.RESUME_INTERCEPT) {

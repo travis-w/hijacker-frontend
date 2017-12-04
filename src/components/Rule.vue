@@ -58,26 +58,38 @@ export default {
   },
   methods: {
     updateRuleBody(val) {
-      this.$store.commit(types.UPDATE_RULE_BODY, {
-        rule: this.rule,
-        newBody: val
+      this.$store.commit(types.UPDATE_RULE, {
+        ...this.rule,
+        body: val
       })
     },
 
     toggleRuleDisabled() {
-      this.$store.commit(types.TOGGLE_RULE_DISABLED, this.rule)
+      this.$store.commit(types.UPDATE_RULE, {
+        ...this.rule,
+        disabled: !this.rule.disabled
+      })
     },
 
     toggleRuleSkipApi() {
-      this.$store.commit(types.TOGGLE_RULE_SKIP_API, this.rule)
+      this.$store.commit(types.UPDATE_RULE, {
+        ...this.rule,
+        skipApi: !this.rule.skipApi
+      })
     },
 
     toggleRuleIntReq() {
-      this.$store.commit(types.TOGGLE_RULE_INT_REQ, this.rule)
+      this.$store.commit(types.UPDATE_RULE, {
+        ...this.rule,
+        interceptRequest: !this.rule.interceptRequest
+      })
     },
 
     toggleRuleIntRes() {
-      this.$store.commit(types.TOGGLE_RULE_INT_RES, this.rule)
+      this.$store.commit(types.UPDATE_RULE, {
+        ...this.rule,
+        interceptResponse: !this.rule.interceptResponse
+      })
     },
 
     toggle() {
