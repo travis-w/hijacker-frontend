@@ -4,8 +4,8 @@
     <span class="path" @click="toggle">{{ rule.name ? `${rule.name} - ` : '' }} {{ rule.path }}</span>
     <div class="collapse" v-show="open">
       <div class="tabs">
-        <span class="tab" @click="tab = 0">Editor</span>
-        <span class="tab" @click="tab = 1">Source</span>
+        <span class="tab" @click="tab = 0" :class="{ 'active': tab === 0 }">Editor</span>
+        <span class="tab" @click="tab = 1" :class="{ 'active': tab === 1 }">Source</span>
       </div>
       <div v-if="tab === 0">
         <div class="category">Quick Settings</div>
@@ -155,10 +155,25 @@ export default {
       }
 
       & > .tabs {
-        margin: 5px 0;
+        margin: 10px 0;
+        cursor: default;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+
+        -o-user-select: none;
+        user-select: none;
 
         .tab {
           cursor: pointer;
+          color: #ffffff;
+          padding: 5px 10px;
+          opacity: .5;
+
+
+          &.active {
+            opacity: 1;
+          }
         }
       }
 
@@ -181,7 +196,7 @@ export default {
       background-color: #e8f6f0;
       border-color: #49cc90;
 
-      & > .method {
+      & > .method, .tab {
         background-color: #49cc90;
       }
     }
@@ -190,7 +205,7 @@ export default {
       background-color: #fbf1e6;
       border-color: #fca130;
 
-      & > .method {
+      & > .method, .tab {
         background-color: #fca130;
       }
     }
@@ -199,7 +214,7 @@ export default {
       background-color: #f4e7fd;
       border-color: #b346ff;
 
-      & > .method {
+      & > .method, .tab {
         background-color: #b346ff;
       }
 
@@ -209,7 +224,7 @@ export default {
       background-color: #fddef5;
       border-color: #ff4dd1;
 
-      & > .method {
+      & > .method, .tab {
         background-color: #ff4dd1;
       }
     }
@@ -218,7 +233,7 @@ export default {
       background-color: #fbe7e7;
       border-color: #f93e3e;
 
-      & > .method {
+      & > .method, .tab {
         background-color: #f93e3e;
       }
     }
@@ -227,7 +242,7 @@ export default {
       background-color: #f9f9f9;
       border-color: #f0f0f0;
 
-      & > .method {
+      & > .method, .tab {
         background-color: #f0f0f0;
       }
 
