@@ -3,31 +3,40 @@
     <span class="method">{{ rule.method || 'ALL' }}</span>
     <span class="path" @click="toggle">{{ rule.name ? `${rule.name} - ` : '' }} {{ rule.path }}</span>
     <div class="collapse" v-show="open">
-      <div class="category">Quick Settings</div>
-      <div class="row">
-        <div class="two columns">
-          <input type="checkbox" :checked="rule.disabled" @click="toggleRuleDisabled" /> Disabled
-        </div>
-        <div class="two columns">
-          <input type="checkbox" :checked="rule.skipApi" @click="toggleRuleSkipApi" /> Skip API
-        </div>
-        <div class="three columns">
-          <input type="checkbox" :checked="rule.interceptRequest"  @click="toggleRuleIntReq" /> Intercept Request
-        </div>
-        <div class="four columns">
-          <input type="checkbox" :checked="rule.interceptResponse"  @click="toggleRuleIntRes" /> Intercept Response
-        </div>
+      <div class="tabs">
+        <span class="tab" @click="tab = 0">Editor</span>
+        <span class="tab" @click="tab = 1">Source</span>
       </div>
-      <div class="category">Response</div>
-      <div class="item" v-if="rule.status">
-        <div class="item-title">Status</div>
-        <div class="item-content json">{{ rule.status }}</div>
+      <div v-if="tab === 0">
+        <div class="category">Quick Settings</div>
+        <div class="row">
+          <div class="two columns">
+            <input type="checkbox" :checked="rule.disabled" @click="toggleRuleDisabled" /> Disabled
+          </div>
+          <div class="two columns">
+            <input type="checkbox" :checked="rule.skipApi" @click="toggleRuleSkipApi" /> Skip API
+          </div>
+          <div class="three columns">
+            <input type="checkbox" :checked="rule.interceptRequest"  @click="toggleRuleIntReq" /> Intercept Request
+          </div>
+          <div class="four columns">
+            <input type="checkbox" :checked="rule.interceptResponse"  @click="toggleRuleIntRes" /> Intercept Response
+          </div>
+        </div>
+        <div class="category">Response</div>
+        <div class="item" v-if="rule.status">
+          <div class="item-title">Status</div>
+          <div class="item-content json">{{ rule.status }}</div>
+        </div>
+        <div class="item" v-if="rule.body">
+          <div class="item-title">Body</div>
+          <JSONEditor :json="rule.body" @change="updateRuleBody" class="item-content"></JSONEditor>
+        </div>
+        <div class="category">Parameters</div>
       </div>
-      <div class="item" v-if="rule.body">
-        <div class="item-title">Body</div>
-        <JSONEditor :json="rule.body" @change="updateRuleBody" class="item-content"></JSONEditor>
+      <div v-if="tab === 1">
+        <JSONEditor :json="rule" @change="updateRule" class="source"></JSONEditor>
       </div>
-      <div class="category">Parameters</div>
     </div>
   </div>
 </template>
@@ -53,10 +62,15 @@ export default {
   },
   data() {
     return {
-      open: false
+      open: false,
+      tab: 0
     }
   },
   methods: {
+    updateRule(val) {
+      this.$store.commit(types.UPDATE_RULE, val)
+    },
+
     updateRuleBody(val) {
       this.$store.commit(types.UPDATE_RULE, {
         ...this.rule,
@@ -140,14 +154,26 @@ export default {
         transition: max-height 0.5s ease-in-out;
       }
 
-      & > .category {
+      & > .tabs {
+        margin: 5px 0;
+
+        .tab {
+          cursor: pointer;
+        }
+      }
+
+      .category {
         background-color: rgba(255, 255, 255, .7);
         padding: 5px;
         margin: 5px 0;
       }
 
-      & > .category:last-child {
+      .category:last-child {
         margin-bottom: 0;
+      }
+
+      .source {
+        margin-top: 5px;
       }
     }
 
