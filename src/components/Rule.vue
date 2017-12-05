@@ -18,7 +18,7 @@
           <input type="checkbox" :checked="rule.interceptResponse"  @click="toggleRuleIntRes" /> Intercept Response
         </div>
       </div>
-      <div class="category">Resposne</div>
+      <div class="category">Response</div>
       <div class="item" v-if="rule.status">
         <div class="item-title">Status</div>
         <div class="item-content json">{{ rule.status }}</div>
@@ -27,7 +27,7 @@
         <div class="item-title">Body</div>
         <JSONEditor :json="rule.body" @change="updateRuleBody" class="item-content"></JSONEditor>
       </div>
-      <div class="category">Paramters</div>
+      <div class="category">Parameters</div>
     </div>
   </div>
 </template>
