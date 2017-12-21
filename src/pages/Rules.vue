@@ -47,10 +47,7 @@
           </div>
         </div>
         <label>Body</label>
-        <textarea
-          class="u-full-width"
-          v-model="body"
-        ></textarea>
+        <JSONEditor :json="body" :options="editorOptions" @change="updateBody" @error="bodyError" class="source"></JSONEditor>
       </form>
     </modal>
   </div>
@@ -65,6 +62,7 @@ import Card from '../components/Card.vue'
 import Rule from '../components/Rule.vue'
 import Modal from '../components/Modal.vue'
 import Intercept from '../components/Intercept.vue'
+import JSONEditor from '../components/JSONEditor.vue'
 
 import * as types from '../store/types'
 
@@ -75,6 +73,10 @@ export default {
       methods: ['ALL', 'POST', 'GET', 'DELETE', 'PUT', 'PATCH'],
       modals: {
         newRule: false
+      },
+      editorOptions: {
+        mode: 'code',
+        modes: []
       }
     }
   },
@@ -82,11 +84,18 @@ export default {
     Card,
     Rule,
     Modal,
-    Intercept
+    Intercept,
+    JSONEditor
   },
   methods: {
     addRule() {
       this.$store.commit('ADD_NEW_RULE')
+    },
+    updateBody(val) {
+      this.$store.commit(types.UPDATE_BODY, val)
+    },
+    bodyError() {
+      this.$store.commit(types.UPDATE_BODY, undefined)
     },
     cancelNewRule() {
       this.modals.newRule = false
@@ -97,15 +106,17 @@ export default {
     ...mapModels({
       path: ['newRule.path', types.UPDATE_PATH],
       method: ['newRule.method', types.UPDATE_METHOD],
-      status: ['newRule.status', types.UPDATE_STATUS],
-      body: ['newRule.body', types.UPDATE_BODY]
+      status: ['newRule.status', types.UPDATE_STATUS]
     }),
     ...mapGetters({
       rules: 'getRules'
     }),
     ...mapState({
       intercepted: 'intercepts'
-    })
+    }),
+    body() {
+      return this.$store.state.newRule.body || {}
+    }
   }
 }
 </script>

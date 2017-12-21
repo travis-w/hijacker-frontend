@@ -30,8 +30,12 @@ export default {
   watch: {
     json: {
       handler (newJson) {
-        if (this.editor && !isEqual(newJson, this.editor.get())) {
-          this.editor.set(newJson)
+        try {
+          if (this.editor && !isEqual(newJson, this.editor.get())) {
+            this.editor.set(newJson)
+          }
+        } catch (e) {
+          // eslint-disable-next-line
         }
       },
       deep: true
@@ -40,7 +44,17 @@ export default {
   methods: {
     _onChange() {
       if (this.editor) {
-        this.$emit('change', this.editor.get())
+        try {
+          this.$emit('change', this.editor.get())
+        } catch(e) {
+          this.$emit('error', this.editor.getText())
+        }
+      }
+    },
+
+    _onError() {
+      if (this.editor) {
+        this.$emit('error', this.editor.getText())
       }
     }
   },
@@ -50,9 +64,11 @@ export default {
       search: false,
       modes: ['tree', 'code'],
       onChange: this._onChange,
+      onError: this._onError,
       history: false,
       navigationBar: false,
-      statusBar: false
+      statusBar: false,
+      ...this.options
     }
 
     this.editor = new JSONEditor(container, options)
