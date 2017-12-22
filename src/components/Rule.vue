@@ -138,6 +138,10 @@ export default {
       margin-left: 5px;
     }
 
+    .tab {
+      background-color: #61affe;
+    }
+
     & > .collapse {
       overflow-y: hidden;
 
