@@ -20,6 +20,7 @@
             <input type="checkbox" :checked="rule.interceptRequest" @click="toggleRuleIntReq" /> Intercept Request
           </div>
           <div class="four columns">
+            <input type="checkbox" :checked="rule.interceptResponse" @click="toggleRuleIntRes" /> Intercept Response
           </div>
         </div>
         <div class="category">Response</div>
